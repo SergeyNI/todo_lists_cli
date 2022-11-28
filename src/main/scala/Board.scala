@@ -1,6 +1,8 @@
-object Board(taskLists:List[TaskList]) {
-  private var currentTaskList:TaskList
-  
-  def setCurrentList(list:TaskList):Unit= currentTaskList = list
-  def getCurrentTaskList():TaskList = currentTaskList
+package Board
+import TaskList.TaskList
+
+object Board {
+
+  // def setCurrentList(list:TaskList):TaskList = currentTaskList = list
+  // def getCurrentTaskList():TaskList = currentTaskList
 }
