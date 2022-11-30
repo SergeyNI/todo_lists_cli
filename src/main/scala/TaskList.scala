@@ -44,5 +44,14 @@ class TaskList(id:Int, name:String, private var tasks: ListBuffer[Task]=ListBuff
     if index <= (tasks.length-2) then
       val bottomTasks = tasks.drop(index+2) //after next element
       tasks = topTasks concat bottomTasks
+  def moveTo(task:Task, newTaskList:TaskList):Unit =
+    newTaskList.add(task)
+    val oldList = task.getList
+    remove(task)
+    //(list.indexOf(task))
+    print(task)
+  private def remove(task:Task) = 
+    tasks -= task
+    
 
 }

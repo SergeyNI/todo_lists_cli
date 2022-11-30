@@ -10,7 +10,7 @@ import Board.*
   val taskDeploy = new Task(3,"DEPLOY ","DEPLOY program",listTODO)
   val taskView = new Task(4,"VIEW ","VIEW program",listTODO)
   listTODO.show
-  // listTODO.up(taskDeploy)
+   listTODO.up(taskDeploy)
   // listTODO.up(taskDeploy)
   // listTODO.up(taskDeploy)
   listTODO.down(taskcreate)
@@ -18,4 +18,8 @@ import Board.*
   listTODO.down(taskcreate)
   //listTODO.down(taskcreate)
   listTODO.show
+  listTODO.moveTo(taskcreate,listInProgress)
+  listTODO.show
+  listInProgress.show
+  
 
