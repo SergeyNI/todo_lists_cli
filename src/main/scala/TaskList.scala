@@ -10,7 +10,9 @@ class TaskList(id:Int, name:String, private var tasks: ListBuffer[Task]=ListBuff
     println('\n'+Console.MAGENTA+s"$this"+'\n')
     tasks.foreach(task=>println(Console.CYAN+task))
   def add(task:Task) = tasks.append(task)
+  
   override def toString(): String = s"($id) $name"
+  
   def up(task:Task):Unit =
     val index = tasks.indexOf(task)
     val prevNumber = index match
