@@ -49,7 +49,7 @@ class TaskList(id:Int, name:String, private var tasks: ListBuffer[Task]=ListBuff
     val oldList = task.getList
     remove(task)
     //(list.indexOf(task))
-    print(task)
+    //print(task)
   private def remove(task:Task) = 
     tasks -= task
     
