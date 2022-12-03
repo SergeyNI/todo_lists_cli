@@ -2,6 +2,7 @@ import Task.*
 import TaskList.*
 import Board.*
 import BoardViewer.*
+import Commander.Commander
 @main def todoBoard: Unit = 
   val boardMain = new Board("main",None,None)
   val listTODO = new TaskList(1,"TODO")
@@ -25,5 +26,8 @@ import BoardViewer.*
   //listTODO.show
   //listInProgress.show
   new BoardViewer(boardMain).show
+  val cmd = new Commander
+  cmd.showCommands
+  cmd.inputCommand
   
 
