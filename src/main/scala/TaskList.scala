@@ -1,17 +1,22 @@
 package TaskList
-import NamedObject.*
+
 import Task.Task
 import scala.collection.mutable.ListBuffer
 
 
-class TaskList(id:Int, name:String, private var tasks: ListBuffer[Task]=ListBuffer.empty[Task]) extends NamedObject {
+class TaskList(name:String,private var board: Board.Board,
+               private var tasks: ListBuffer[Task]=ListBuffer.empty[Task],
+               private var currentTask: Option[Task] = None)  {
 
-  def show:Unit= 
-    println('\n'+Console.MAGENTA+s"$this"+'\n')
-    tasks.foreach(task=>println(Console.CYAN+task))
-  def add(task:Task) = tasks.append(task)
+  def add(task:Task) = 
+    tasks.append(task)
+    task.setList(this)
   
-  override def toString(): String = s"($id) $name"
+  override def toString(): String = 
+    val id = board.taskLists.indexOf(this)
+    s"($id) $name"
+  
+  def get:ListBuffer[Task] = tasks
   
   def up(task:Task):Unit =
     val index = tasks.indexOf(task)
@@ -33,9 +38,7 @@ class TaskList(id:Int, name:String, private var tasks: ListBuffer[Task]=ListBuff
     val index = tasks.indexOf(task)
     val numberElementOfListBeforeCurrentElement =  index
     val topTasks = tasks.take(numberElementOfListBeforeCurrentElement)
-    // val nextIndex = index match
-    //   case tasks.length => index
-    //   case x => x+1
+    
     if index < (tasks.length-1) then
       val nextTask = tasks(index+1)
       topTasks.append(nextTask)
@@ -44,14 +47,14 @@ class TaskList(id:Int, name:String, private var tasks: ListBuffer[Task]=ListBuff
     if index <= (tasks.length-2) then
       val bottomTasks = tasks.drop(index+2) //after next element
       tasks = topTasks concat bottomTasks
+  
   def moveTo(task:Task, newTaskList:TaskList):Unit =
     newTaskList.add(task)
-    val oldList = task.getList
     remove(task)
-    //(list.indexOf(task))
-    //print(task)
+
   private def remove(task:Task) = 
     tasks -= task
-    
+  
+  board.add(this)
 
 }
