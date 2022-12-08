@@ -11,11 +11,17 @@ case class Board(name:String,var taskLists:ListBuffer[TaskList] = ListBuffer.emp
   def getCurrentTaskList():Option[TaskList] = currentTaskList
   
   def getLists() = taskLists
-  def add(list:TaskList) = taskLists.append(list)
+  def isCurrent(list:TaskList) = currentTaskList.get == list
+  
+  def add(list:TaskList) =
+    taskLists.append(list)
+    if taskLists.length == 1 then setCurrentList(list) 
+  
   def list(index:Int):Option[TaskList] = if index >=0 && index < taskLists.length then Some(taskLists(index)) else None
 
   def remove(list:TaskList) = {
     taskLists = taskLists.filterNot(currlist => currlist == list)
+    if taskLists.length == 1 then setCurrentList(taskLists(0)) 
   }
 
 

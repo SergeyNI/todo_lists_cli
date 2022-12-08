@@ -50,7 +50,8 @@ class Commander(board: Board):
       // What we do if this partial function matches
       def apply(str: String) =
         val strArg = str.substring(3)
-        val newlist = new TaskList(strArg,board)
+        val newlist = new TaskList(strArg)
+        board.add(newlist)
         BoardViewer(board).showBoard
         true
     }
