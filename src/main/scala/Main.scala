@@ -2,7 +2,7 @@ import Task.*
 import TaskList.*
 import Board.*
 import BoardViewer.*
-// import Commander.Commander
+import Commander.Commander
 @main def todoBoard: Unit = 
   val boardMain = Board("main")
   val listTODO = TaskList("TODO")
@@ -19,15 +19,16 @@ import BoardViewer.*
   listTODO.add(taskTest)
   listTODO.add(taskDeploy)
   listTODO.add(taskView)
-  // listTODO.down(taskcreate)
-  // listTODO.down(taskcreate)
-  // listTODO.down(taskcreate)
+  listTODO down taskcreate
+  listTODO down taskcreate
+  listTODO down taskcreate
+  
   
   listTODO.moveTo(taskDeploy,listInProgress)
   
   BoardViewer(boardMain).showBoard
-  // val cmd = new Commander(boardMain)
-  // cmd.showCommands
-  // cmd.inputCommand
+  val cmd = new Commander(boardMain)
+  cmd.showCommands
+  cmd.inputCommand
   
 

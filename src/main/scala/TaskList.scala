@@ -28,35 +28,35 @@ case class TaskList(name:String,
   
   def get:ListBuffer[Task] = tasks
   
-  // def up(task:Task):Unit =
-  //   val index = tasks.indexOf(task)
-  //   val prevNumber = index match
-  //     case 0 => index
-  //     case x => x-1
-
-  //   val topTasks = tasks.take(prevNumber)
-
-  //   topTasks.append(task)
-  //   if index >0 then 
-  //     val prevTask = tasks(index-1)
-  //     topTasks.append(prevTask)
-
-  //   val bottomTasks = tasks.drop(index+1)
-  //   tasks = topTasks concat bottomTasks
-  
-  // def down(task:Task):Unit =
-  //   val index = tasks.indexOf(task)
-  //   val numberElementOfListBeforeCurrentElement =  index
-  //   val topTasks = tasks.take(numberElementOfListBeforeCurrentElement)
+  def up(task:Task):Unit =
+    val index = tasks.indexOf(task)
+    val prevNumber = index match
+      case 0 => index
+      case x => x-1
     
-  //   if index < (tasks.length-1) then
-  //     val nextTask = tasks(index+1)
-  //     topTasks.append(nextTask)
-  //   topTasks.append(task)
+    val topTasks = tasks.take(prevNumber)
+    topTasks += task  
+  
+    if index >0 then 
+      val prevTask = tasks(index-1)
+      topTasks += prevTask
 
-  //   if index <= (tasks.length-2) then
-  //     val bottomTasks = tasks.drop(index+2) //after next element
-  //     tasks = topTasks concat bottomTasks
+    val bottomTasks = tasks.drop(index+1)
+    tasks = topTasks concat bottomTasks
+  
+  def down(task:Task):Unit =
+    val index = tasks.indexOf(task)
+    val numberElementOfListBeforeCurrentElement =  index
+    val topTasks = tasks.take(numberElementOfListBeforeCurrentElement)
+    
+    if index < (tasks.length-1) then
+      val nextTask = tasks(index+1)
+      topTasks.append(nextTask)
+    topTasks.append(task)
+
+    if index <= (tasks.length-2) then
+      val bottomTasks = tasks.drop(index+2) //after next element
+      tasks = topTasks concat bottomTasks
   
   def moveTo(task:Task, newTaskList:TaskList):Unit =
     newTaskList.add(task)
