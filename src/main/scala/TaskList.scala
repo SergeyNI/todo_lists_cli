@@ -20,7 +20,13 @@ case class TaskList(name:String,
     tasks += task
     if tasks.length == 1 then setCurrentTask(task)
     // task.setList(this)
-  def current = currentTask.get
+  def current = currentTask
+  def task(index:Int):Option[Task] = 
+    try
+      Some(tasks(index))
+    catch 
+      case _ => None
+
   
   override def toString(): String = name
     // val id = board.taskLists.indexOf(this)
