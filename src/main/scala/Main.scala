@@ -28,7 +28,7 @@ import Commander.Commander
   
   BoardViewer(boardMain).showBoard
   val cmd = new Commander(boardMain)
-  cmd.showCommands
+  // cmd.showCommands
   cmd.inputCommand
   
 
