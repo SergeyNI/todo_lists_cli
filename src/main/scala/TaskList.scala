@@ -6,7 +6,7 @@ import scala.collection.mutable.ListBuffer
 
 case class TaskList(name:String,
                     private var tasks: ListBuffer[Task]=ListBuffer.empty[Task],
-                    private var currentTask: Option[Task] = None)  {
+                    private var currentTask: Option[Task] = None):
   
   def setCurrentTask(task:Task) =
     
@@ -57,8 +57,8 @@ case class TaskList(name:String,
     
     if index < (tasks.length-1) then
       val nextTask = tasks(index+1)
-      topTasks.append(nextTask)
-    topTasks.append(task)
+      topTasks += nextTask
+    topTasks += task
 
     if index <= (tasks.length-2) then
       val bottomTasks = tasks.drop(index+2) //after next element
@@ -68,8 +68,7 @@ case class TaskList(name:String,
     newTaskList.add(task)
     remove(task)
 
-  def remove(task:Task) = 
-    
+  def remove(task:Task) =
     if tasks.length == 1 then setCurrentTask(tasks(0))
     val previndex = tasks.indexOf(task) match
       case 0 => 0
@@ -77,6 +76,3 @@ case class TaskList(name:String,
     tasks -= task
     val prevTask = tasks(previndex)
     setCurrentTask(prevTask)
-    
-
-}

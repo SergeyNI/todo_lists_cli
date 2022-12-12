@@ -1,13 +1,9 @@
 package Commander
 
 import scala.io.StdIn.readLine
-import TaskList.TaskList
 import Board.Board
-import BoardViewer.BoardViewer
 import CommandLib.*
 
-import scala.compiletime.ops.any
-import scala.compiletime.ops.boolean
 
 class Commander(board: Board):
 
@@ -22,7 +18,6 @@ class Commander(board: Board):
     println(Console.BLUE + str1)
 
   private def executeCommand(str: String): Boolean =
-    
     str match
       case s if s.startsWith("sl ") && s.length() > 3 => SelectList(board,s).doIt
       case s if s.startsWith("al ") && s.length() > 3 => AddList(board,s).doIt

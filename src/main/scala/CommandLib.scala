@@ -33,6 +33,7 @@ case class SelectList(board: Board,str:String) extends Command:
         case None           => println(s"can't find task list by index $arg")
       BoardViewer(board).showBoard
     true
+
 case class SelectTask(board: Board,str:String) extends Command:
   def doIt: Boolean =
     val strArg = str.substring(3) // get argument of command as string
@@ -70,12 +71,14 @@ case class CurrentTaskMove(board: Board,str:String) extends Command:
               s"in current task list '$taskList' not found current task"
             )
     changesHasDone(board)
+
 case class AddList(board: Board,str:String) extends Command:
   def doIt: Boolean =
     val strArg = str.substring(3)
     val newlist = new TaskList(strArg)
     board.add(newlist)
     changesHasDone(board)
+
 case class RemoveList(board: Board,str:String) extends Command:
   def doIt: Boolean =
     val strArg = str.substring(3)
