@@ -2,6 +2,7 @@ package CommandLib
 
 import TaskList.TaskList
 import Board.Board
+import TaskBuilder.TaskBuilder
 import BoardViewer.BoardViewer
 
 trait Command:
@@ -91,4 +92,21 @@ case class RemoveList(board: Board,str:String) extends Command:
       case _ => println(s"parameter of command is not Integer")
     changesHasDone(board)
 
-
+case class AddTaskToCurrentList(board: Board,str:String) extends Command:
+  def doIt: Boolean =
+    board.currentTaskList match
+      case None => println("not selected current task list")
+      case Some(list) =>
+    
+        val strArg = str.substring(3)
+        val subStrArr = strArg.split("/")
+        Tuple.fromArray(subStrArr) match
+          case (name:String, _) =>
+            val taskOption = TaskBuilder(name,_2,list)
+            taskOption match
+              case Some(task) => changesHasDone(board)
+              case None => println("can not create task");changesHasDone(board)
+          case _ => println("Too many argument string. Must be 2 parameters") 
+      true
+case class ShowBoard(board:Board) extends Command:
+  def doIt: Boolean = changesHasDone(board)
