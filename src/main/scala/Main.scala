@@ -27,27 +27,8 @@ import Commander.Commander
     case Some(taskCreate) => for{_ <- 1 to 3}{listTODO down taskCreate}
     case _ =>
   
-  
-   
-  
-
-  //val taskTest:Option[Task] = Task("Test program ","TEST program")
-  // val taskDeploy:Option[Task] = Task("DEPLOY ","DEPLOY program")
-  // val taskView = Task("VIEW ","VIEW program")
-  // listTODO.add(taskcreate)
-  // listTODO.add(taskTest)
-  // listTODO.add(taskDeploy)
-  // listTODO.add(taskView)
-  // listTODO down taskcreate
-  // listTODO down taskcreate
-  // listTODO down taskcreate
-  
-  
-  // listTODO.moveTo(taskDeploy,listInProgress)
-  
   BoardViewer(boardMain).showBoard
   val cmd = new Commander(boardMain)
-  // cmd.showCommands
   cmd.inputCommand
   
 

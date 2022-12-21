@@ -1,51 +1,49 @@
-import org.scalatest.funspec.AnyFunSpec
-
+package TaskSpec
+import UnitSpec._
 import Task.Task
 
-class TaskSpec extends AnyFunSpec {
+class TaskSpec extends UnitSpec {
   describe("instance of Task with:") {
     describe("name property") {
       
       it("succesfully created with correct name") {
         val name = "create rpogramm"
         val taskCreateProgramm = Task(name,name)
-        assert(taskCreateProgramm.isInstanceOf[Task])
+        assert(taskCreateProgramm.value.isInstanceOf[Task])
       }
 
       it("can't created with empty name") {
         val name = ""
-        assertThrows[IllegalArgumentException]{
-          val taskCreateProgramm = Task(name,name)
-        }
+        val taskCreateProgramm = Task(name,name)
+        taskCreateProgramm shouldEqual None
+        // assertThrows[IllegalArgumentException]{
+        //   val taskCreateProgramm = Task(name,name)
+        // }
       }
 
-      it("can't created with  name's length < 3") {
+      it("can't created with  name's length < 3"){
         val name = "aa"
-        assertThrows[IllegalArgumentException]{
-          val taskCreateProgramm = Task(name,name)
-        }
-        
-      }
+        Task(name,name) shouldEqual None}
+      
   
     }
     describe("content property"){
-      it("succesfully created with empty value"){
+      it("allow succesfully create with empty value"){
         val name = "create pogramm"
-        val taskCreateProgramm = Task(name,"")
-        assert(taskCreateProgramm.isInstanceOf[Task])
+        
+        assert(Task(name,"").value.isInstanceOf[Task])
       }
       it("succesfully created with filled value"){
         val name = "create pogramm"
-        val taskCreateProgramm = Task(name,"A")
-        assert(taskCreateProgramm.isInstanceOf[Task])
+        
+        Task(name,"A").value shouldBe a[Task]
       }
     }
   }
   describe("toString method") {
-    it("return name as result"){
-      val name = "create rpogramm"
-      val taskCreateProgramm = Task(name,name)
-      assert(taskCreateProgramm.toString == name)
+    it ("return name as result"){
+      val name = "create program"
+      Task(name,name).value.toString should be equals name
     }
   }
 }
