@@ -26,6 +26,9 @@ import Commander.Commander
   taskCreateOption match
     case Some(taskCreate) => for{_ <- 1 to 3}{listTODO down taskCreate}
     case _ =>
+  taskCreateOption match
+    case Some(taskCreate) => for{_ <- 1 to 2}{listTODO up taskCreate}
+    case _ =>
   
   BoardViewer(boardMain).showBoard
   val cmd = new Commander(boardMain)

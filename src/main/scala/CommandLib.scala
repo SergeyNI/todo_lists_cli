@@ -46,8 +46,8 @@ case class SelectTask(board: Board,str:String) extends Command:
             case None => println("not found current tasklist")
             case Some(taskList) =>
               taskList.task(x) match
-                case Some(task) => taskList.setCurrentTask(task)
-                case _ =>
+                case Some(task) => taskList.setCurrentTask(Some(task))
+                case None =>
                   println(
                     s"in current task list '$taskList' not found task by index $x"
                   )

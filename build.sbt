@@ -12,6 +12,7 @@ lazy val root = project
     libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.14",
     libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.14" % "test",
     libraryDependencies += "org.scalatest" %% "scalatest-funspec" % "3.2.14" % "test",
-    libraryDependencies += "org.scalatestplus" %% "scalacheck-1-17" % "3.2.14.0" % "test"
-    
+    libraryDependencies += "org.scalatestplus" %% "scalacheck-1-17" % "3.2.14.0" % "test",
+    libraryDependencies += "io.spray" %%  "spray-json" % "1.3.6"
   )
+
