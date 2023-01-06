@@ -2,10 +2,10 @@ package Board
 import TaskList.TaskList
 import scala.collection.mutable.ListBuffer
 
-case class Board(name:String,var taskLists:ListBuffer[TaskList] = ListBuffer.empty[TaskList], var currentTaskList:Option[TaskList] = None){
+case class Board(name:String,var taskLists:List[TaskList] = Nil, var currentTaskList:Option[TaskList] = None){
   override def toString(): String = name
   def setCurrentList(list:TaskList) = 
-    println(s"On board $this seted current tasklist $list")
+    // println(s"On board $this seted current tasklist $list")
     currentTaskList = Some(list)
   
   def getCurrentTaskList():Option[TaskList] = currentTaskList
@@ -14,7 +14,7 @@ case class Board(name:String,var taskLists:ListBuffer[TaskList] = ListBuffer.emp
   def isCurrent(list:TaskList) = currentTaskList.get == list
   
   def add(list:TaskList) =
-    taskLists.append(list)
+    taskLists = list ::taskLists
     if taskLists.length == 1 then setCurrentList(list) 
   
   def list(index:Int):Option[TaskList] = if index >=0 && index < taskLists.length then Some(taskLists(index)) else None

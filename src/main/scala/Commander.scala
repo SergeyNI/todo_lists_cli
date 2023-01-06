@@ -3,6 +3,8 @@ package Commander
 import scala.io.StdIn.readLine
 import Board.Board
 import CommandLib.*
+import BoardLoader.MyJsonProtocol._
+import BoardLoader.BoardWriter
 
 
 class Commander(board: Board):
@@ -29,7 +31,7 @@ class Commander(board: Board):
       case s if s.startsWith("ctm ") && s.length() > 4 => CurrentTaskMove(board,s).doIt
       case s if s == "help"  => showCommands; true
       case s if s == "show"  => ShowBoard(board).doIt
-      case s if s == "quit" => false
+      case s if s == "quit" => BoardWriter(board).write();false
       case s =>
         println(s"command $s not found")
         showCommands
