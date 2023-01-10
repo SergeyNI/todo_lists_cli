@@ -50,9 +50,8 @@ object MyJsonProtocol extends DefaultJsonProtocol{
         case _ => JsNull
     override def read(json: JsValue): Option[Task] = 
       json match
-        case JsObject(fields) =>
-          val task = Task(fields("name").toString,fields("content").toString)
-          task
+        case JsObject(fields) => //JsObject(fields).convertTo[Task]
+          Task(fields("name").convertTo[String],fields("content").convertTo[String])
         case _=> None
   }
   implicit val taskListformat:RootJsonFormat[TaskList] = jsonFormat3(TaskList.apply)
@@ -73,6 +72,7 @@ class BoardLoader(fileName:String):
     val loadJson: String => String = (fileName:String) => Source.fromFile(fileName).getLines.mkString
     val readJson: String => Board = (strJson:String) => strJson.parseJson.convertTo[Board]
     (loadJson map readJson)(fileName)
+
 case class BoardWriter(board:Board):
   import MyJsonProtocol._
   def write() =
