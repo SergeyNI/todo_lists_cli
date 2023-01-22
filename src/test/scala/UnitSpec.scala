@@ -8,4 +8,4 @@ import org.scalatest.OptionValues
 // import org.scalatest.flatspec.AnyFlatSpec
 
 
-abstract class UnitSpec extends AnyFunSpec with should.Matchers with Inside with Inspectors with OptionValues
+abstract class UnitSpec extends AnyFunSpec with should.Matchers with Inside with Inspectors with OptionValues with PrivateMethodTester 

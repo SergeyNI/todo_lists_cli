@@ -4,20 +4,21 @@ import TaskList.TaskList
 import Board.Board
 import TaskBuilder.TaskBuilder
 import BoardViewer.BoardViewer
+import org.scalactic.Bool
 
 trait Command:
+  val board:Board 
   protected def toInt(s: String): Option[Int] =
     try Some(s.toInt)
     catch case e: Exception => None
 
-  def doIt: Boolean
+  //def doIt: Boolean
 
-  def changesHasDone(board: Board): Boolean =
+  def changesHasDone(): Boolean =
     BoardViewer(board).showBoard
     true
-
-case class SelectList(board: Board, str: String) extends Command:
-  def doIt: Boolean =
+  
+  def selectList(str: String):Boolean =
     val strArg = str.substring(3)
     val argOption = toInt(strArg)
     val arg = argOption match
@@ -32,9 +33,15 @@ case class SelectList(board: Board, str: String) extends Command:
       case None           => println(s"can't find task list by index $arg")
     BoardViewer(board).showBoard
     true
-
-case class SelectTask(board: Board, str: String) extends Command:
-  def doIt: Boolean =
+  
+  def addList(str: String):Boolean =
+    val strArg = str.substring(3)
+    val newlist = new TaskList(strArg)
+    board.add(newlist)
+    changesHasDone()
+  
+  
+  def selectTask(str: String):Boolean = 
     val strArg = str.substring(3) // get argument of command as string
     val argOption = toInt(strArg)
     argOption match
@@ -52,8 +59,7 @@ case class SelectTask(board: Board, str: String) extends Command:
         BoardViewer(board).showBoard
     true
 
-case class CurrentTaskMove(board: Board, str: String) extends Command:
-  def doIt: Boolean =
+  def currentTaskMoveOnList(str:String):Boolean =
     val currentTasklist = board.currentTaskList match
       case None => println("not found current tasklist")
       case Some(taskList) =>
@@ -69,18 +75,10 @@ case class CurrentTaskMove(board: Board, str: String) extends Command:
             println(
               s"in current task list '$taskList' not found current task"
             )
-    changesHasDone(board)
-
-case class AddList(board: Board, str: String) extends Command:
-  def doIt: Boolean =
-    val strArg = str.substring(3)
-    val newlist = new TaskList(strArg)
-    board.add(newlist)
-    changesHasDone(board)
-
-case class RemoveList(board: Board, str: String) extends Command:
-  def doIt: Boolean =
-    val strArg = str.substring(3)
+    changesHasDone()
+  
+  def removeList(str: String):Boolean =
+   val strArg = str.substring(3)
     val optionIndex = toInt(strArg)
     optionIndex match
       case Some(index) =>
@@ -88,10 +86,9 @@ case class RemoveList(board: Board, str: String) extends Command:
           case Some(taskList) => board.remove(taskList)
           case _              => println(s"not found task list by index $index")
       case _ => println(s"parameter of command is not Integer")
-    changesHasDone(board)
-
-case class AddTaskToCurrentList(board: Board, str: String) extends Command:
-  def doIt: Boolean =
+    changesHasDone()
+  
+  def addTaskToCurrentList(str: String):Boolean =
     board.currentTaskList match
       case None => println("not selected current task list")
       case Some(list) =>
@@ -101,9 +98,9 @@ case class AddTaskToCurrentList(board: Board, str: String) extends Command:
           case (name: String, content: String) =>
             val taskOption = TaskBuilder(name, content, list)
             taskOption match
-              case Some(task) => changesHasDone(board)
-              case None => println("can not create task"); changesHasDone(board)
+              case Some(task) => changesHasDone()
+              case None => println("can not create task"); changesHasDone()
           case _ => println("Too many argument string. Must be 2 parameters")
-    true
-case class ShowBoard(board: Board) extends Command:
-  def doIt: Boolean = changesHasDone(board)
+    changesHasDone()
+  //def removeList(str: String):Boolean =
+// 

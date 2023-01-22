@@ -7,7 +7,8 @@ import BoardLoader.MyJsonProtocol._
 import BoardLoader.BoardWriter
 
 
-class Commander(board: Board):
+class Commander(currentBoard: Board) extends Command:
+  val board = currentBoard 
 
   def showCommands: Unit =
     val str1 = s"Aviable commands:" + '\n' +
@@ -23,17 +24,17 @@ class Commander(board: Board):
 
   private def executeCommand(str: String): Boolean =
     str match
-      case s if s.startsWith("sl ") && s.length() > 3 => SelectList(board,s).doIt
-      case s if s.startsWith("al ") && s.length() > 3 => AddList(board,s).doIt
-      case s if s.startsWith("rl ") && s.length() > 3 => RemoveList(board,s).doIt
-      case s if s.startsWith("st ") && s.length() > 3 => SelectTask(board,s).doIt
-      case s if s.startsWith("at ") && s.length() > 3 => AddTaskToCurrentList(board,s).doIt
-      case s if s.startsWith("ctm ") && s.length() > 4 => CurrentTaskMove(board,s).doIt
+      case s if s.startsWith("sl ") && s.length() > 3 => selectList(s)
+      case s if s.startsWith("al ") && s.length() > 3 => addList(s)
+      case s if s.startsWith("rl ") && s.length() > 3 => removeList(s)//RemoveList(board,s).doIt
+      case s if s.startsWith("st ") && s.length() > 3 => selectTask(s)//SelectTask(board,s).doIt
+      case s if s.startsWith("at ") && s.length() > 3 => addTaskToCurrentList(s)//AddTaskToCurrentList(board,s).doIt
+      case s if s.startsWith("ctm ") && s.length() > 4 => currentTaskMoveOnList(s)//CurrentTaskMove(board,s).doIt
       case s if s == "help"  => showCommands; true
-      case s if s == "show"  => ShowBoard(board).doIt
+      case s if s == "show"  => changesHasDone()
       case s if s == "quit" => BoardWriter(board).write();false
       case s =>
-        println(s"command $s not found")
+        println(s"command '$s' not found")
         showCommands
         true
 

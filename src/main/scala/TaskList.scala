@@ -22,10 +22,6 @@ case class TaskList(name:String,
           end if
         result
       case None => currentTask = None;true
-    
-
-    
-
   
   def isCurrent(task:Task):Boolean = currentTask.get == task
   
@@ -79,3 +75,7 @@ case class TaskList(name:String,
   def remove(task:Task) =
     if tasks.contains(task) then
       tasks = tasks.filter(currTask => currTask != task)
+
+// object TaskListTaskList:
+//   def apply(name:String,private var tasks: List[Task] = Nil,
+//             private var currentTask: Option[Task] = None):Option[TaskList]=
