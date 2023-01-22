@@ -1,26 +1,27 @@
 {
   "currentTaskList": {
     "currentTask": {
-      "content": "create on scala program TODO BOARD",
-      "name": "Create program TODO"
+      "content": "view test",
+      "name": "view"
     },
-    "name": "TODO",
+    "name": "done",
     "tasks": [{
-      "name": "test program TODO",
-      "content": "test program TODO BOARD"
-    }, {
-      "name": "Create program TODO",
-      "content": "create on scala program TODO BOARD"
-    }, {
-      "name": "DEPLOY program TODO",
-      "content": "DEPLOY program TODO BOARD to production"
-    }, {
-      "name": "VIEW program TODO",
-      "content": "VIEW program TODO BOARD in production"
+      "name": "view",
+      "content": "view test"
     }]
   },
   "name": "main",
   "taskLists": [{
+    "currentTask": {
+      "content": "view test",
+      "name": "view"
+    },
+    "name": "done",
+    "tasks": [{
+      "name": "view",
+      "content": "view test"
+    }]
+  }, {
     "currentTask": null,
     "name": "IN PROGRESS",
     "tasks": []
@@ -34,14 +35,20 @@
       "name": "test program TODO",
       "content": "test program TODO BOARD"
     }, {
-      "name": "Create program TODO",
-      "content": "create on scala program TODO BOARD"
-    }, {
       "name": "DEPLOY program TODO",
       "content": "DEPLOY program TODO BOARD to production"
     }, {
       "name": "VIEW program TODO",
       "content": "VIEW program TODO BOARD in production"
+    }, {
+      "name": "Create program TODO",
+      "content": "create on scala program TODO BOARD"
+    }, {
+      "name": "name",
+      "content": "at name/content"
+    }, {
+      "name": "short name",
+      "content": "at short name/content"
     }]
   }]
 }

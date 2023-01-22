@@ -7,6 +7,7 @@ import Commander.Commander
 import spray.json.enrichAny
 import BoardLoader.pathfiles
 import BoardLoader._
+
 def initializeMainBoard():Board =
   val boardMain = Board("main")
   val listTODO = TaskList("TODO")

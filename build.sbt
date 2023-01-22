@@ -1,4 +1,5 @@
 val scala3Version = "3.2.1"
+// crossScalaVersions ++= Seq("2.13.6", "3.2.1")
 
 lazy val root = project
   .in(file("."))
@@ -16,4 +17,10 @@ lazy val root = project
     libraryDependencies += "io.spray" %%  "spray-json" % "1.3.6",
     libraryDependencies += "org.typelevel" %% "cats-core" % "2.9.0"
   )
+// lazy val doobieVersion = "1.0.0-RC2"
 
+// libraryDependencies ++= Seq(
+//   "org.tpolecat" %% "doobie-core"     % doobieVersion,
+//   "org.tpolecat" %% "doobie-postgres" % doobieVersion,
+//   "org.tpolecat" %% "doobie-specs2"   % doobieVersion
+// )

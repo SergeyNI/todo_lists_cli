@@ -8,10 +8,24 @@ case class TaskList(name:String,
                     private var tasks: List[Task] = Nil,
                     private var currentTask: Option[Task] = None):
   
-  def setCurrentTask(task:Option[Task]) =
+  def setCurrentTask(task:Option[Task]):Boolean =
+    task match
+      case Some(t) =>
+        val result = 
+          if tasks.exists(curr => curr == t) then
+            currentTask = Some(t)
+            println(s"in list $this current task is $t")
+            true
+          else
+            println(s"in list '$this' task '$t' not found!!Unable set current list  ")
+            false
+          end if
+        result
+      case None => currentTask = None;true
     
-    currentTask = task
-    println(s"in list $this current task is $task")
+
+    
+
   
   def isCurrent(task:Task):Boolean = currentTask.get == task
   
@@ -61,15 +75,7 @@ case class TaskList(name:String,
       case Nil => None
       case head::tail => Some(head)
       )
+  
   def remove(task:Task) =
     if tasks.contains(task) then
       tasks = tasks.filter(currTask => currTask != task)
-      
-      
-    // if tasks.length == 1 then setCurrentTask(tasks(0))
-    // val previndex = tasks.indexOf(task) match
-    //   case 0 => 0
-    //   case x: Int => x-1 
-    // tasks -= task
-    // val prevTask = tasks(previndex)
-    // setCurrentTask(prevTask)
