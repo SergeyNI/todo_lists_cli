@@ -3,39 +3,24 @@ import UnitSpec._
 import TaskList.TaskList
 import Task._
 import fixtures._
-// class ExampleSpec extends FixtureAnyFunSpec:
-//   def withFixture(test: OneArgTest) =
 
 class TaskListSpec extends UnitSpec with TaskListFixtures:
-  // trait TaskListFixtures:
-  //   val taskCreateProgramName = "Create program"
-  //   val taskOptionCreate:Option[Task] = Task(taskCreateProgramName,taskCreateProgramName)
-  //   val taskCreate:Task = taskOptionCreate.get
-    
-
-  //   val taskDebugName = "Debug program"
-  //   val taskOptionDebug:Option[Task] = Task(taskDebugName,taskDebugName)
-  //   val taskDebug:Task = taskOptionDebug.get
-
-  //   val toDoName = "Todo"
-  //   val taskListTodo = TaskList(toDoName)
-  //   val doneName = "Done"
-  //   val taskListDone = TaskList(doneName)
-  //   def taskListTodoWithTaskCreate():TaskList = 
-  //     taskListTodo.add(taskCreate)
-  //     taskListTodo
-  //   def taskListTodoWithTasksCreateAndDebug():TaskList =
-  //     taskListTodo.add(taskCreate)
-  //     taskListTodo.add(taskDebug)
-  //     taskListTodo
+  
   describe("TaskList"){
-
-    it("is case class"){
+    it("instance of Option TaskList"){
       val name = "name"
-      val task1 = TaskList(name)
-      val task2 = TaskList(name)
-      task1 should be equals task2
+      val tl1 = TaskList(name)
+      val tl2 = TaskList(name)
+      tl1.isInstanceOf[Option[TaskList]] shouldBe true
+      tl1.get should be equals tl2.get
     }
+    it("return None if names length less then 3"){
+      new TaskListFixtures{
+        taskListDoOption should be equals(None)
+      }
+    }  
+  }
+  describe("method add"){
     it ("succesfull add new task") {
       new TaskListFixtures{
         val lengthBefore = taskListTodo.get.length
@@ -46,8 +31,6 @@ class TaskListSpec extends UnitSpec with TaskListFixtures:
       }
      
     }
-    
-    
   }
   describe("method setCurrentTask"){
       

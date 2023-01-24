@@ -76,6 +76,5 @@ case class TaskList(name:String,
     if tasks.contains(task) then
       tasks = tasks.filter(currTask => currTask != task)
 
-// object TaskListTaskList:
-//   def apply(name:String,private var tasks: List[Task] = Nil,
-//             private var currentTask: Option[Task] = None):Option[TaskList]=
+object TaskList:
+  def apply(name:String):Option[TaskList]= if name.length() >3 then Some(new TaskList(name)) else None

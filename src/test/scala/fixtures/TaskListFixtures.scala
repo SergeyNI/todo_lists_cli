@@ -16,20 +16,38 @@ trait TaskListFixtures {
   val taskDebug:Task = taskOptionDebug.get
 
   val toDoName = "Todo"
-  val taskListTodo = TaskList(toDoName)
+  val taskListTodo = TaskList(toDoName).get
   val doneName = "Done"
-  val taskListDone = TaskList(doneName)
+  val taskListDone = TaskList(doneName).get
+  val taskListDoOption = TaskList("do")
+  
+  val deployTaskname = "deploy";
+  val deployTaskContent = "Deploy program to production"
+  val deployTask = Task(deployTaskname,deployTaskContent).get
+  
   def taskListTodoWithTaskCreate():TaskList = 
     taskListTodo.add(taskCreate)
     taskListTodo
+  
   def taskListTodoWithTasksCreateAndDebug():TaskList =
     taskListTodo.add(taskCreate)
     taskListTodo.add(taskDebug)
     taskListTodo
+  
   def emptyBoardMain():Board = boardMain
+  
   def boardMainWithTaskLists():Board =
     boardMain.add(taskListTodo)
     boardMain.add(taskListDone)
     boardMain
+  def boardMainWithTaskListsAndCurrentTaskListTodo():Board =
+    boardMain.add(taskListTodo)
+    boardMain.add(taskListDone)
+    boardMain.setCurrentList(taskListTodo)
+    boardMain
+  def boardMainWithTaskListsAndCurrentTaskListTodoAndCurrentTask(task:Task):Board =
+    val tl = taskListTodoWithTasksCreateAndDebug()
+    tl.setCurrentTask(Some(task))
+    boardMainWithTaskListsAndCurrentTaskListTodo()
 
 }

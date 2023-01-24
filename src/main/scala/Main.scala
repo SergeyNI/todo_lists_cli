@@ -10,24 +10,25 @@ import BoardLoader._
 
 def initializeMainBoard():Board =
   val boardMain = Board("main")
-  val listTODO = TaskList("TODO")
-  val listInProgress = TaskList("IN PROGRESS")
-  boardMain.add(listTODO)
-  boardMain.add(listInProgress)
-
+ 
+  TaskList("TODO") match
+    case Some(listTODO) =>
+      boardMain.add(listTODO)
+      TaskBuilder("test program TODO","test program TODO BOARD",listTODO)
+      TaskBuilder("DEPLOY program TODO","DEPLOY program TODO BOARD to production",listTODO)
+      TaskBuilder("VIEW program TODO","VIEW program TODO BOARD in production",listTODO)
+      val taskCreateOption = TaskBuilder("Create program TODO","create on scala program TODO BOARD",listTODO)
+      taskCreateOption match
+        case Some(taskCreate) => for{_ <- 1 to 3}{listTODO down taskCreate}
+        case None =>
+      taskCreateOption match
+        case Some(taskCreate) => for{_ <- 1 to 2} {listTODO up taskCreate}
+        case None =>
+    case None => 
   
-  val taskCreateOption = TaskBuilder("Create program TODO","create on scala program TODO BOARD",listTODO)
   
+  TaskList("IN PROGRESS") map (listInProgress=>boardMain.add(listInProgress))  
   
-  TaskBuilder("test program TODO","test program TODO BOARD",listTODO)
-  TaskBuilder("DEPLOY program TODO","DEPLOY program TODO BOARD to production",listTODO)
-  TaskBuilder("VIEW program TODO","VIEW program TODO BOARD in production",listTODO)
-  taskCreateOption match
-    case Some(taskCreate) => for{_ <- 1 to 3}{listTODO down taskCreate}
-    case _ =>
-  taskCreateOption match
-    case Some(taskCreate) => for{_ <- 1 to 2} {listTODO up taskCreate}
-    case _ =>
   boardMain
 
   
@@ -41,8 +42,6 @@ def initializeMainBoard():Board =
   BoardViewer(boardMain).showBoard
   val cmd = new Commander(boardMain)
  
-  // BoardWriter(boardMain).write()
-  // val boardMainnew = loader.read(loader.load)
   cmd.inputCommand
   
 

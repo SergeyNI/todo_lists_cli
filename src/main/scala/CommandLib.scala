@@ -31,24 +31,27 @@ trait Command:
     someTaskList match
       case Some(taskList) => board.setCurrentList(taskList)
       case None           => println(s"can't find task list by index $arg")
-    BoardViewer(board).showBoard
-    true
+    changesHasDone()
   
   def addList(str: String):Boolean =
     val strArg = str.substring(3)
-    val newlist = new TaskList(strArg)
-    board.add(newlist)
-    changesHasDone()
+    val newlist = TaskList(strArg)
+    newlist match
+      case Some(tl) =>
+        board.add(tl)
+        changesHasDone()
+      case None => println(s"Too small name of task list"); true
+    
   
   
   def selectTask(str: String):Boolean = 
     val strArg = str.substring(3) // get argument of command as string
     val argOption = toInt(strArg)
     argOption match
-      case None => println(s"can't convert index  of list $strArg to Int")
+      case None => println(s"can't convert index  of list $strArg to Int");true
       case Some(x) =>
         val currentTasklist = board.currentTaskList match
-          case None => println("not found current tasklist")
+          case None => println("not found current tasklist");true
           case Some(taskList) =>
             taskList.task(x) match
               case Some(task) => taskList.setCurrentTask(Some(task))
@@ -56,8 +59,8 @@ trait Command:
                 println(
                   s"in current task list '$taskList' not found task by index $x"
                 )
-        BoardViewer(board).showBoard
-    true
+        changesHasDone()
+    
 
   def currentTaskMoveOnList(str:String):Boolean =
     val currentTasklist = board.currentTaskList match
@@ -67,15 +70,15 @@ trait Command:
           case Some(task) =>
             val strArg = str.substring(4)
             strArg match
-              case "u" => taskList.up(task)
-              case "d" => taskList.down(task)
+              case "u" => taskList.up(task);changesHasDone()
+              case "d" => taskList.down(task);changesHasDone()
               // case "n" =>taskList.moveTo(task,)
               case other => println(s"don't recognize direction $other")
           case _ =>
             println(
               s"in current task list '$taskList' not found current task"
             )
-    changesHasDone()
+    true
   
   def removeList(str: String):Boolean =
    val strArg = str.substring(3)
@@ -99,8 +102,8 @@ trait Command:
             val taskOption = TaskBuilder(name, content, list)
             taskOption match
               case Some(task) => changesHasDone()
-              case None => println("can not create task"); changesHasDone()
-          case _ => println("Too many argument string. Must be 2 parameters")
-    changesHasDone()
+              case None => println("can not create task. Lenght of task name must be more then 2")
+          case _ => println("Count of parameters must be equals 2: task name/task content ")
+    true
   //def removeList(str: String):Boolean =
 // 
