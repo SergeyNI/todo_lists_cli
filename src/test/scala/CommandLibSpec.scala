@@ -156,8 +156,55 @@ class CommandLibSpec extends UnitSpec with TaskListFixtures:
           
         }}
       }
-      // it("successfull move current task"){new TaskListFixtures {
+      describe("l"){
+        it("successfull move current task"){new TaskListFixtures {
+          val b = boardMainWithTaskListsAndCurrentTaskListTodoAndCurrentTask(taskCreate)
+          val tl = b.currentTaskList
+          val currentTask = tl.get.current.get
+          //val currentIndex = tl.get.get.indexOf(currentTask)
+          executeCommand(b)(s"ctm l")
+          tl.get.get should not contain currentTask
+          taskListDone.get should contain (currentTask)
+          // val newCurrentIndex = tl.get.get.indexOf(currentTask)
+          // newCurrentIndex should be > (currentIndex)
+        }}
+        it("stay on index of current task"){new TaskListFixtures {
+          val b = boardMainWithTaskListsAndCurrentTaskListTodoAndCurrentTask(taskCreate)
+          val tl = b.currentTaskList
+          val currentTask = tl.get.current.get
+          
+          executeCommand(b)(s"ctm l")
+          taskListDone.get should contain (currentTask)
+          tl.get.get should not contain currentTask
+          executeCommand(b)(s"ctm l")// after repeated move task stay on taskListDone
+          taskListDone.get should contain (currentTask)
+        }}
+      }
 
+      describe("r"){
+        it("stay on index of current task"){new TaskListFixtures {
+          val b = boardMainWithTaskListsAndCurrentTaskListTodoAndCurrentTask(taskCreate)
+          val tl = b.currentTaskList //some(toto)
+          val currentTask = tl.get.current.get
+          
+          executeCommand(b)(s"ctm r")
+          tl.get.get should  contain (currentTask)
+          
+        }}
+        it("successfull move current task"){new TaskListFixtures {
+          val b = boardMainWithTaskListsAndCurrentTaskListDoneWithCurrentTaskDeploy()
+          val tl = b.currentTaskList
+          val currentTask = tl.get.current.get
+          
+          executeCommand(b)(s"ctm r")
+          taskListDone.get should not contain (currentTask)
+          taskListTodo.get should contain (currentTask)
+        
+
+        }}
+      }
+      //template for copy paste
+      // it("successfull move current task"){new TaskListFixtures {
       // }}
     }
 

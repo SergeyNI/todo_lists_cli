@@ -15,7 +15,10 @@ case class BoardViewer(board: Board) {
   def showList(list:TaskList) =
     def markCurrentList(list:TaskList):String = 
       val someCurrentList:Option[TaskList] = board.getCurrentTaskList()
-      if someCurrentList.contains(list) then "*" else ""
+      someCurrentList match
+        case Some(l) if l == list => "*"
+        case _=>""
+      // if someCurrentList.contains(list) then "*" else ""
     def markCurrentTask(task:Task):String =
       val isCurrentList = this.board.isCurrent(list)
       if list.isCurrent(task) && isCurrentList then "*" else ""

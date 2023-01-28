@@ -2,24 +2,30 @@
   "currentTaskList": {
     "currentTask": {
       "content": "view test",
-      "name": "view"
+      "name": "view test"
     },
     "name": "done",
     "tasks": [{
-      "name": "view",
+      "name": "view test",
       "content": "view test"
+    }, {
+      "name": "qwerty asdf",
+      "content": "zxcvvbn nj"
     }]
   },
   "name": "main",
   "taskLists": [{
     "currentTask": {
       "content": "view test",
-      "name": "view"
+      "name": "view test"
     },
     "name": "done",
     "tasks": [{
-      "name": "view",
+      "name": "view test",
       "content": "view test"
+    }, {
+      "name": "qwerty asdf",
+      "content": "zxcvvbn nj"
     }]
   }, {
     "currentTask": null,

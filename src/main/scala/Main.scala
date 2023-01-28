@@ -11,9 +11,10 @@ import BoardLoader._
 def initializeMainBoard():Board =
   val boardMain = Board("main")
  
-  TaskList("TODO") match
+  val optionListTodo = TaskList("TODO") match
     case Some(listTODO) =>
       boardMain.add(listTODO)
+      boardMain.setCurrentList(listTODO)
       TaskBuilder("test program TODO","test program TODO BOARD",listTODO)
       TaskBuilder("DEPLOY program TODO","DEPLOY program TODO BOARD to production",listTODO)
       TaskBuilder("VIEW program TODO","VIEW program TODO BOARD in production",listTODO)

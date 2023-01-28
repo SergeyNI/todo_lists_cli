@@ -45,6 +45,16 @@ trait TaskListFixtures {
     boardMain.add(taskListDone)
     boardMain.setCurrentList(taskListTodo)
     boardMain
+  def taskListDoneWithCurrentTaskDeploy():TaskList= //boardMainWithTaskListsAndAndCurrentTask
+    taskListDone.add(deployTask)
+    taskListDone.setCurrentTask(Some(deployTask))
+    taskListDone
+  
+  def boardMainWithTaskListsAndCurrentTaskListDoneWithCurrentTaskDeploy():Board =
+    boardMain.add(taskListTodo)
+    boardMain.add(taskListDoneWithCurrentTaskDeploy())
+    boardMain.setCurrentList(taskListDone)
+    boardMain
   def boardMainWithTaskListsAndCurrentTaskListTodoAndCurrentTask(task:Task):Board =
     val tl = taskListTodoWithTasksCreateAndDebug()
     tl.setCurrentTask(Some(task))

@@ -72,7 +72,12 @@ trait Command:
             strArg match
               case "u" => taskList.up(task);changesHasDone()
               case "d" => taskList.down(task);changesHasDone()
-              // case "n" =>taskList.moveTo(task,)
+              case "l" => board.list(board.taskLists.indexOf(taskList)-1) match
+                            case Some(newlist) => taskList.moveTo(task,newlist); changesHasDone()
+                            case None => println("current task list is first on board")
+              case "r" => board.list(board.taskLists.indexOf(taskList)+1) match
+                            case Some(newlist) => taskList.moveTo(task,newlist); changesHasDone()
+                            case None => println("current task list is last on board")  
               case other => println(s"don't recognize direction $other")
           case _ =>
             println(
@@ -96,7 +101,9 @@ trait Command:
       case None => println("not selected current task list")
       case Some(list) =>
         val strArg = str.substring(3)
+        println(s"arguments:$strArg")
         val subStrArr = strArg.split("/")
+        println(s"arguments:$strArg")
         Tuple.fromArray(subStrArr) match
           case (name: String, content: String) =>
             val taskOption = TaskBuilder(name, content, list)
