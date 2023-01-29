@@ -14,8 +14,9 @@ class Commander(currentBoard: Board) extends Command:
     val str1 = s"Aviable commands:" + '\n' +
       "sl listID # -select current list" + '\n' +
       "st taskID # -select current task" + '\n' +
+      "rl taskID # -remove current task" + '\n' +
       "at name/content # -add new task to  current task list" + '\n' +
-      "ctm u(d) # -move current task up(down) in current list" + '\n' +
+      "ctm u(d,l,r) # -move current task up(down) in current list or (l,r) move to another list" + '\n' +
       "al nameOfList # add new list" + '\n' +
       "quit # quit of program" + '\n'
       "show # show current board" + '\n'
@@ -26,8 +27,8 @@ class Commander(currentBoard: Board) extends Command:
     str match
       case s if s.startsWith("sl ") && s.length() > 3 => selectList(s)
       case s if s.startsWith("al ") && s.length() > 3 => addList(s)
-      case s if s.startsWith("rl ") && s.length() > 3 => removeList(s)//RemoveList(board,s).doIt
-      case s if s.startsWith("st ") && s.length() > 3 => selectTask(s)//SelectTask(board,s).doIt
+      case s if s.startsWith("rl ") && s.length() > 3 => removeList(s)
+      case s if s.startsWith("st ") && s.length() > 3 => selectTask(s)
       case s if s.startsWith("at ") && s.length() > 3 => addTaskToCurrentList(s)//AddTaskToCurrentList(board,s).doIt
       case s if s.startsWith("ctm ") && s.length() > 4 => currentTaskMoveOnList(s)//CurrentTaskMove(board,s).doIt
       case s if s == "help"  => showCommands; true

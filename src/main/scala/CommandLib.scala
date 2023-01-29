@@ -4,7 +4,6 @@ import TaskList.TaskList
 import Board.Board
 import TaskBuilder.TaskBuilder
 import BoardViewer.BoardViewer
-import org.scalactic.Bool
 
 trait Command:
   val board:Board 
@@ -101,9 +100,7 @@ trait Command:
       case None => println("not selected current task list")
       case Some(list) =>
         val strArg = str.substring(3)
-        println(s"arguments:$strArg")
         val subStrArr = strArg.split("/")
-        println(s"arguments:$strArg")
         Tuple.fromArray(subStrArr) match
           case (name: String, content: String) =>
             val taskOption = TaskBuilder(name, content, list)
