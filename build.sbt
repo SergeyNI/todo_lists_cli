@@ -1,4 +1,4 @@
-val scala3Version = "3.2.1"
+val scala3Version = "3.3.0"
 // crossScalaVersions ++= Seq("2.13.6", "3.2.1")
 
 lazy val root = project
